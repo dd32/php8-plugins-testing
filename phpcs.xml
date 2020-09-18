@@ -116,6 +116,7 @@
 	<rule ref="PHPCompatibility.FunctionUse.RemovedFunctions.eachDeprecatedRemoved">
 		<!-- false positive: https://github.com/PHPCompatibility/PHPCompatibility/issues/961 -->
 		<exclude-pattern>guzzlehttp/promises</exclude-pattern>
+		<exclude-pattern>GuzzleHttp/Promise</exclude-pattern>
 	</rule>
 
 </ruleset>
