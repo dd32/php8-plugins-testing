@@ -71,7 +71,10 @@ foreach ( (array) $files as $_php_file ) {
 		// Remove the filename from all messages, format for easier to read.
 		foreach ( $output as $i => $line ) {
 			// Remove the Errors parsing... message
-			if ( str_starts_with( $line, 'Errors parsing' ) ) {
+			if (
+				str_starts_with( $line, 'Errors parsing' ) || // Errors detected
+				str_starts_with( $line, 'No syntax errors detected in ' ) // Only PHP Warnings detected
+			) {
 				unset( $output[ $i ] );
 				continue;
 			}
