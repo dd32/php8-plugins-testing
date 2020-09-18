@@ -82,6 +82,10 @@
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_listfieldsDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_dbnameDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_table_nameDeprecatedRemoved"/>
+
+		<!-- yes, func_get_args() changed in PHP7, we don't care. -->
+		<exclude name="PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.Changed"/>
+
 	</rule>
 
 	<rule ref="PHPCompatibility.FunctionUse.RemovedFunctions.eachDeprecatedRemoved">
