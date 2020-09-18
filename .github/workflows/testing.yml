@@ -25,7 +25,7 @@ jobs:
         if [ -z "$VERSION" ]; then VERSION="latest-stable"; fi
         ZIP="https://downloads.wordpress.org/plugin/$SLUG.$VERSION.zip?nostats=1"
         echo Downloading $ZIP..
-        curl "$ZIP" -o plugin.zip
+        curl "$ZIP" -so plugin.zip
         unzip -q plugin.zip -d plugin
       env:
           SLUG: "${{ github.event.client_payload.slug }}"
