@@ -31,4 +31,4 @@ jobs:
           SLUG: "${{ github.event.client_payload.slug }}"
           VERSION: "${{ github.event.client_payload.version }}"
     - name: Run PHP 8 Compatibility Checks
-      run: ./run_checks.php "${{ github.event.client_payload.slug }}"
+      run: ./run_checks.php "${{ github.event.client_payload.slug }}" "${{ github.event.client_payload.version }}"

@@ -31,7 +31,15 @@ if ( $returnval > 0 ) {
 	$output = preg_replace('/\e[[][A-Za-z0-9];?[0-9]*m?/', '', $output );
 
 	// Remove the last two lines, they're the errata after the test.
-	$output = array_slice( $output, 0, -3 );
+	$output = array_slice( $output, 0, -2 );
+
+	// Append some useful links
+	if ( isset( $argc[1] ) ) {
+		$slug    = $argc[1];
+		$version = $argc[2] ?? '';
+		$output[] = "https://wordpress.org/plugins/$slug/";
+		$output[] = "https://plugins.trac.wordpress.org/browser/$slug/" . ( $version && 'trunk' != $version ? 'tags/' : '' ) . $version;
+	}
 
 	echo '::error::' . implode( '%0A', $output ) . "\n";
 	$exit_status = 1;
