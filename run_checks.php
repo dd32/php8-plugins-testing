@@ -65,6 +65,9 @@ foreach ( (array) $files as $_php_file ) {
 			$error = 'warning';
 		}
 
+		// Remove empty lines.
+		$output = array_filter( $output );
+
 		// Remove the filename from all messages, format for easier to read.
 		foreach ( $output as $i => $line ) {
 			// Remove the Errors parsing... message
