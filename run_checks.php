@@ -54,9 +54,9 @@ $notices = [ 'error' => [], 'warning' => [] ];
 
 foreach ( (array) $files as $_php_file ) {
 	$output = [];
-	$php_file = preg_replace( '|^plugin/|', '', $_php_file );
+	$php_file = preg_replace( '|^plugin/[^/]+/|', '', $_php_file );
 
-	exec( 'cd plugin && php -l ' . escapeshellarg( $php_file ) . ' 2>&1', $output );
+	exec( 'php -l ' . escapeshellarg( $_php_file ) . ' 2>&1', $output );
 	echo implode( "\n", $output ) . "\n";
 
 	if ( ! str_contains( $output[0], 'No syntax errors detected' ) ) {
@@ -74,7 +74,7 @@ foreach ( (array) $files as $_php_file ) {
 			}
 
 			// Remove the file reference.
-			$output[ $i ] = str_replace( [ "in $php_file on", "in $_php_file on" ], 'on', $line );
+			$output[ $i ] = str_replace( "in $_php_file on", 'on', $line );
 
 			// Move the Line reference to the start.
 			$output[ $i ] = preg_replace( '!^(.+) on line (\d+)$!i', 'Line $2 $1', $output[ $i ] );
