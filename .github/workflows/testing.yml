@@ -10,6 +10,7 @@ jobs:
     - uses: php-actions/composer@v2
     - name: Setup Environment
       run: |
+        pwd && ls -lah
         mkdir -p vendor/PHPCompatibility/PHPCompatibility
         git clone https://github.com/PHPCompatibility/PHPCompatibility vendor/PHPCompatibility/PHPCompatibility
         cd vendor/PHPCompatibility/PHPCompatibility && composer install
