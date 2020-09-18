@@ -5,6 +5,15 @@ $exit_status = 0;
 // PHP8 compat functions for testing.
 require __DIR__ . '/vendor/symfony/polyfill-php80/bootstrap.php';
 
+// Prepend some useful links.. This should be an info rather than warning/error? Not sure GitHub has one though?
+if ( isset( $argc[1] ) ) {
+	$slug    = $argc[1];
+	$version = $argc[2] ?? '';
+	echo "::warning::" .
+		"Plugin: https://wordpress.org/plugins/$slug/" . "%0A" .
+		"Trac: https://plugins.trac.wordpress.org/browser/$slug/" . ( $version && 'trunk' != $version ? 'tags/' : '' ) . $version;
+}
+
 // Run PHP CS PHPCompatibility checks.
 exec( ( file_exists( 'vendor/bin/phpcs' ) ? 'vendor/bin/phpcs' : 'phpcs' ) . ' -s plugin', $output, $returnval );
 echo implode( "\n", $output );
@@ -32,14 +41,6 @@ if ( $returnval > 0 ) {
 
 	// Remove the last two lines, they're the errata after the test.
 	$output = array_slice( $output, 0, -2 );
-
-	// Append some useful links
-	if ( isset( $argc[1] ) ) {
-		$slug    = $argc[1];
-		$version = $argc[2] ?? '';
-		$output[] = "https://wordpress.org/plugins/$slug/";
-		$output[] = "https://plugins.trac.wordpress.org/browser/$slug/" . ( $version && 'trunk' != $version ? 'tags/' : '' ) . $version;
-	}
 
 	echo '::error::' . implode( '%0A', $output ) . "\n";
 	$exit_status = 1;
