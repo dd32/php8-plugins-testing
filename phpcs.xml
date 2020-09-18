@@ -8,6 +8,8 @@
 	<exclude-pattern>polyfill</exclude-pattern>
 	<!-- PHPSecLib uses multitude of libraries, including deprecated mcrypt. Lets skip it. -->
 	<exclude-pattern>phpseclib</exclude-pattern>
+	<!-- sodium_compat uses deprecated functions/constants, skip it. -->
+	<exclude-pattern>sodium_compat</exclude-pattern>
 
 	<!-- Only check .php files, avoids PHPCS issues with CSS/JS files. -->
 	<arg name="extensions" value="php"/>
