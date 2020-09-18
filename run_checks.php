@@ -33,10 +33,10 @@ if ( $returnval > 0 ) {
 exec( 'find plugin -name "*.php" -not -name "*polyfill*"', $files, $returnval );
 foreach ( (array) $files as $php_file ) {
 	$output = [];
-	exec( 'php -l ' . escapeshellarg( $php_file ), $output, $returnval );
+	exec( 'php -l ' . escapeshellarg( $php_file ), $output );
 	echo implode( "\n", $output ) . "\n";
 
-	if ( $returnval > 0 ) {
+	if ( ! str_contains( $output[0], 'No syntax errors detected' ) ) {
 		echo '::error::' . implode( '%0A', $output ) . "\n";
 		$exit_status = 1;
 	}
