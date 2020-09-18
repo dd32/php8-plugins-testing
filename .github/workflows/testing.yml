@@ -27,4 +27,6 @@ jobs:
           SVN_DIR: "${{ github.event.client_payload.svn }}"
     - name: Run PHPCompatibility checks
       run: |
-        ./run.sh
+        ./phpcs.php
+    -name: PHP 8 Linting
+      run: find plugin -name "*.php" -not -name "*polyfill*" -print0 | xargs -P4 -0 -I% php -l %
