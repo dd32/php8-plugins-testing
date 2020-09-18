@@ -28,6 +28,9 @@ if ( $returnval > 0 ) {
 	// Strip color/bolding in output. We want the highlighting usually, just not here.
 	$output = preg_replace('/\e[[][A-Za-z0-9];?[0-9]*m?/', '', $output );
 
+	// Remove the last two lines, they're the errata after the test.
+	$output = array_slice( $output, 0, count( $output ) - 3 );
+
 	echo '::error::' . implode( '%0A', $output ) . "\n";
 	$exit_status = 1;
 }
