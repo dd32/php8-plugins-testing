@@ -12,7 +12,8 @@ if ( !empty( $argv[1] ) ) {
 	$version = $argv[2] ?? '';
 	echo '::warning::' .
 		"Plugin: https://wordpress.org/plugins/$slug/" . "%0A" .
-		"Trac: https://plugins.trac.wordpress.org/browser/$slug/" . ( $version && 'trunk' != $version ? 'tags/' : '' ) . $version;
+		"Trac: https://plugins.trac.wordpress.org/browser/$slug/" . ( $version && 'trunk' != $version ? 'tags/' : '' ) . $version .
+		"\n";
 }
 
 // Run PHP CS PHPCompatibility checks.
@@ -64,14 +65,30 @@ foreach ( (array) $files as $_php_file ) {
 			$error = 'warning';
 		}
 
-		// Remove the filename from all messages, shorter easier to read.
+		// Remove the filename from all messages, format for easier to read.
 		foreach ( $output as $i => $line ) {
+			// Remove the Errors parsing... message
+			if ( str_starts_with( $line, 'Errors parsing' ) ) {
+				unset( $output[ $i ] );
+				continue;
+			}
+
+			// Remove the file reference.
 			$output[ $i ] = str_replace( [ "in $php_file on", "in $_php_file on" ], 'on', $line );
+
+			// Move the Line reference to the start.
+			$output[ $i ] = preg_replace( '!^(.+) on line (\d+)$!i', 'Line $2 $1', $output[ $i ] );
+
+			// Add a line break on longer messages if multiple sentence.
+			$output[ $i ] = preg_replace( '!^(\w{30,})\. (\w{30,})!', '$1.%0A      $2', $output[ $i ]);
+
+			// Indent for readability.
+			$output[ $i ] = '  ' . $output[ $i ];
 		}
 
 		$notices[ $error ] = array_merge(
 			$notices[ $error ],
-			[ '', '', $php_file ], // prepend the filename.
+			[ '', $php_file ], // prepend the filename.
 			$output
 		);
 		$exit_status = 1;
