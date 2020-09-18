@@ -22,9 +22,14 @@ jobs:
     - name: Checkout Plugin
       run: |
         mkdir -p plugin
-        svn export $SVN_DIR plugin --force
+        ZIP="https://downloads.wordpress.org/plugin/$SLUG.latest-stable.zip"
+        if [ -z "$VERSION" ];
+          then ZIP="https://downloads.wordpress.org/plugin/$SLUG.$VERSION.zip"
+        fi
+        curl $ZIP -so plugin.zip
+        unzip -q plugin.zip -d plugin
       env:
-          SVN_DIR: "${{ github.event.client_payload.svn }}"
+          SLUG: "${{ github.event.client_payload.slug }}"
+          VERSION: "${{ github.event.client_payload.version }}"
     - name: Run PHP 8 Compatibility Checks
-      run: |
-        ./run_checks.php
+      run: ./run_checks.php "${{ github.event.client_payload.slug }}"
