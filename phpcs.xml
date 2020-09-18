@@ -11,6 +11,7 @@
 	<arg name="extensions" value="php"/>
 
 	<arg name="basepath" value="plugin"/>
+	<arg name="colors"/>
 	<arg name="parallel" value="75"/>
 	<arg value="np"/>
 
