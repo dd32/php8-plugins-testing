@@ -1,3 +1,3 @@
 #!/bin/sh
 
-phpcs -s plugin
+vendor/bin/phpcs -s plugin

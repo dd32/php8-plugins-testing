@@ -11,12 +11,14 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.0'
-        tools: composer, phpcs
+        tools: composer
     - name: Setup Environment
       run: |
+        composer install
         mkdir -p vendor/PHPCompatibility/PHPCompatibility
         git clone https://github.com/PHPCompatibility/PHPCompatibility vendor/PHPCompatibility/PHPCompatibility
         cd vendor/PHPCompatibility/PHPCompatibility && composer install
+        php --version
     - name: Checkout Plugin
       run: |
         mkdir -p plugin
@@ -25,5 +27,4 @@ jobs:
           SVN_DIR: "${{ github.event.client_payload.svn }}"
     - name: Run PHPCompatibility checks
       run: |
-        pwd && ls -lah
         ./run.sh
