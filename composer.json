@@ -1,0 +1,6 @@
+{
+    "require": {
+        "squizlabs/php_codesniffer": "*",
+        "phpcsstandards/phpcsutils": "1.x-dev"
+    }
+}

@@ -1,0 +1,22 @@
+name: PHP8 Readiness.
+
+on: repository_dispatch
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: php-actions/composer@v2
+    - name: Setup Environment
+      run: |
+        composer install
+        git clone https://github.com/PHPCompatibility/PHPCompatibility vendor/PHPCompatibility/PHPCompatibility
+        cd vendor/PHPCompatibility/PHPCompatibility && composer install
+    - name: Checkout Plugin
+      run: |
+        svn export $SVN_DIR plugin --force
+      env:
+          SVN_DIR: "${{ github.event.client_payload.svn }}"
+    - name: Run PHPCompatibility checks
+      run: run.sh
