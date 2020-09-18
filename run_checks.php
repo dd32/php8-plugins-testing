@@ -2,12 +2,8 @@
 <?php
 $exit_status = 0;
 
-// Compat function for testing on older PHP.
-if ( ! function_exists( 'str_contains' ) ) {
-	function str_contains( $haystack, $needle ) {
-		return '' === $needle || false !== strpos($haystack, $needle );
-	}
-}
+// PHP8 compat functions for testing.
+require __DIR__ . '/vendor/symfony/polyfill-php80/bootstrap.php';
 
 // Run PHP CS PHPCompatibility checks.
 exec( ( file_exists( 'vendor/bin/phpcs' ) ? 'vendor/bin/phpcs' : 'phpcs' ) . ' -s plugin', $output, $returnval );
@@ -51,7 +47,12 @@ foreach ( (array) $files as $php_file ) {
 	echo implode( "\n", $output ) . "\n";
 
 	if ( ! str_contains( $output[0], 'No syntax errors detected' ) ) {
-		echo '::error::' . implode( '%0A', array_slice( $output, 0, -1 ) ) . "\n";
+		$error = 'error';
+		if ( str_starts_with( $output[0], 'PHP Warning:' ) && ! str_contains( $output[0], 'PHP Fatal error' ) ) {
+			$error = 'warning';
+		}
+
+		echo "::$error::" . implode( '%0A', array_slice( $output, 0, -1 ) ) . "\n";
 		$exit_status = 1;
 	}
 }
