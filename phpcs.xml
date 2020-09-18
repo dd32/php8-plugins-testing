@@ -16,11 +16,77 @@
 	<arg value="np"/>
 
 	<rule ref="PHPCompatibility">
+		<!-- We don't need to warn about MySQL functions being removed. It's probably being used conditionally. -->
+		<exclude name="PHPCompatibility.Extensions.RemovedExtensions.mysql_DeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_createdbDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_dropdbDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_listtablesDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_db_queryDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_escape_stringDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_list_dbsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_list_fieldsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_affected_rowsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_client_encodingDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_closeDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_connectDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_create_dbDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_data_seekDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_db_nameDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_drop_dbDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_errnoDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_errorDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fetch_arrayDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fetch_assocDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fetch_fieldDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fetch_lengthsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fetch_objectDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fetch_rowDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_field_flagsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_field_lenDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_field_nameDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_field_seekDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_field_tableDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_field_typeDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_free_resultDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_get_client_infoDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_get_host_infoDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_get_proto_infoDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_get_server_infoDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_infoDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_insert_idDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_list_processesDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_list_tablesDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_num_fieldsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_num_rowsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_pconnectDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_pingDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_queryDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_real_escape_stringDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_resultDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_select_dbDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_set_charsetDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_statDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_tablenameDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_thread_idDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_unbuffered_queryDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fieldnameDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fieldtableDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fieldlenDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fieldtypeDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_fieldflagsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_selectdbDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_freeresultDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_numfieldsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_numrowsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_listdbsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_listfieldsDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_dbnameDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_table_nameDeprecatedRemoved"/>
 	</rule>
 
 	<rule ref="PHPCompatibility.FunctionUse.RemovedFunctions.eachDeprecatedRemoved">
 		<!-- false positive: https://github.com/PHPCompatibility/PHPCompatibility/issues/961 -->
 		<exclude-pattern>guzzlehttp/promises</exclude-pattern>
 	</rule>
-	
+
 </ruleset>
