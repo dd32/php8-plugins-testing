@@ -82,11 +82,8 @@ foreach ( (array) $files as $_php_file ) {
 			// Remove annoying double space.
 			$output[ $i ] = str_replace( ':  ', ': ', $output[ $i ] );
 
-			// Move the Line reference to the start.
-			$output[ $i ] = preg_replace( '!^(.+) on line (\d+)$!i', 'Line $2 $1', $output[ $i ] );
-
 			// Add a line break on longer messages if multiple sentence.
-			$output[ $i ] = preg_replace( '!^(.{30,})\. (.{30,})!', '$1.%0A      $2', $output[ $i ] );
+			$output[ $i ] = preg_replace( '!^(.{30,})\. (.{30,}) (on line \d+)$!', '$1.%0A      $2%0A      $3', $output[ $i ] );
 
 			// Indent for readability.
 			$output[ $i ] = '  ' . $output[ $i ];
@@ -97,12 +94,13 @@ foreach ( (array) $files as $_php_file ) {
 			[ '', $php_file ], // prepend the filename.
 			$output
 		);
+
 		$exit_status = 1;
 	}
 }
 foreach ( $notices as $type => $data ) {
 	if ( $data ) {
-		echo "::$type::" . implode( '%0A', array_slice( $data, 0, -1 ) ) . "\n";
+		echo "::$type::" . implode( '%0A', $data ) . "\n";
 	}
 }
 
