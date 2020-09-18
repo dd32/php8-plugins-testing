@@ -28,5 +28,5 @@ jobs:
     - name: Run PHPCompatibility checks
       run: |
         ./phpcs.php
-    -name: PHP 8 Linting
+    - name: PHP 8 Linting
       run: find plugin -name "*.php" -not -name "*polyfill*" -print0 | xargs -P4 -0 -I% php -l %
