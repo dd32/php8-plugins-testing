@@ -16,8 +16,10 @@
 	<arg value="np"/>
 
 	<rule ref="PHPCompatibility">
-		<!-- We don't need to warn about MySQL functions being removed. It's probably being used conditionally. -->
+		<!-- Don't worry about the deprecated mysql extension. -->
 		<exclude name="PHPCompatibility.Extensions.RemovedExtensions.mysql_DeprecatedRemoved"/>
+
+		<!-- We don't need to warn about MySQL functions being removed. It's probably being used conditionally. -->
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_createdbDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_dropdbDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_listtablesDeprecatedRemoved"/>
@@ -86,6 +88,11 @@
 		<!-- yes, func_get_args() changed in PHP7, we don't care. -->
 		<exclude name="PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.Changed"/>
 
+		<!--
+			Calling die() or exit() within a __construct() will no longer call __destruct().
+			It's rare for plugins to have the __destruct(), and it doesn't check if it has one or not.
+		-->
+		<exclude name="PHPCompatibility.FunctionDeclarations.RemovedCallingDestructAfterConstructorExit.Found"/>
 	</rule>
 
 	<rule ref="PHPCompatibility.FunctionUse.RemovedFunctions.eachDeprecatedRemoved">
