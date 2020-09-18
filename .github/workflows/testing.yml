@@ -14,10 +14,10 @@ jobs:
         tools: composer
     - name: Setup Environment
       run: |
-        composer install
+        composer install --no-dev
         mkdir -p vendor/PHPCompatibility/PHPCompatibility
         git clone https://github.com/PHPCompatibility/PHPCompatibility vendor/PHPCompatibility/PHPCompatibility
-        cd vendor/PHPCompatibility/PHPCompatibility && composer install
+        cd vendor/PHPCompatibility/PHPCompatibility && composer install --no-dev
         php --version
     - name: Checkout Plugin
       run: |
