@@ -74,13 +74,16 @@ foreach ( (array) $files as $_php_file ) {
 			}
 
 			// Remove the file reference.
-			$output[ $i ] = str_replace( "in $_php_file on", 'on', $line );
+			$output[ $i ] = str_replace( "in $_php_file on", 'on', $output[ $i ] );
+
+			// Remove annoying double space.
+			$output[ $i ] = str_replace( ':  ', ': ', $output[ $i ] );
 
 			// Move the Line reference to the start.
 			$output[ $i ] = preg_replace( '!^(.+) on line (\d+)$!i', 'Line $2 $1', $output[ $i ] );
 
 			// Add a line break on longer messages if multiple sentence.
-			$output[ $i ] = preg_replace( '!^(\w{30,})\. (\w{30,})!', '$1.%0A      $2', $output[ $i ]);
+			$output[ $i ] = preg_replace( '!^(.{30,})\. (.{30,})!', '$1.%0A      $2', $output[ $i ] );
 
 			// Indent for readability.
 			$output[ $i ] = '  ' . $output[ $i ];
