@@ -89,6 +89,20 @@
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_dbnameDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_table_nameDeprecatedRemoved"/>
 
+		<!-- And the mysql Ini settings-->
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_allow_local_infileRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_allow_persistentRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_max_persistentRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_max_linksRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_trace_modeRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_default_portRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_default_socketRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_default_hostRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_default_userRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_default_passwordRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_connect_timeoutRemoved"/>
+		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_connect_timeoutRemoved"/>
+
 		<!-- yes, func_get_args() changed in PHP7, we don't care. -->
 		<exclude name="PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.Changed"/>
 
