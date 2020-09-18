@@ -3,13 +3,14 @@
 $exit_status = 0;
 
 // PHP8 compat functions for testing.
+require __DIR__ . '/vendor/symfony/polyfill-php80/Php80.php';
 require __DIR__ . '/vendor/symfony/polyfill-php80/bootstrap.php';
 
 // Prepend some useful links.. This should be an info rather than warning/error? Not sure GitHub has one though?
-if ( isset( $argc[1] ) ) {
-	$slug    = $argc[1];
-	$version = $argc[2] ?? '';
-	echo "::warning::" .
+if ( !empty( $argv[1] ) ) {
+	$slug    = $argv[1];
+	$version = $argv[2] ?? '';
+	echo '::warning::' .
 		"Plugin: https://wordpress.org/plugins/$slug/" . "%0A" .
 		"Trac: https://plugins.trac.wordpress.org/browser/$slug/" . ( $version && 'trunk' != $version ? 'tags/' : '' ) . $version;
 }
@@ -48,9 +49,11 @@ if ( $returnval > 0 ) {
 
 // Run PHP8 linting.
 exec( 'find plugin -name "*.php" -not -name "*polyfill*"', $files, $returnval );
-foreach ( (array) $files as $php_file ) {
+$notices = [ 'error' => [], 'warning' => [] ];
+
+foreach ( (array) $files as $_php_file ) {
 	$output = [];
-	$php_file = preg_replace( '|^plugin/|', '', $php_file );
+	$php_file = preg_replace( '|^plugin/|', '', $_php_file );
 
 	exec( 'cd plugin && php -l ' . escapeshellarg( $php_file ) . ' 2>&1', $output );
 	echo implode( "\n", $output ) . "\n";
@@ -61,8 +64,22 @@ foreach ( (array) $files as $php_file ) {
 			$error = 'warning';
 		}
 
-		echo "::$error::" . implode( '%0A', array_slice( $output, 0, -1 ) ) . "\n";
+		// Remove the filename from all messages, shorter easier to read.
+		foreach ( $output as $i => $line ) {
+			$output[ $i ] = str_replace( [ "in $php_file on", "in $_php_file on" ], 'on', $line );
+		}
+
+		$notices[ $error ] = array_merge(
+			$notices[ $error ],
+			[ '', '', $php_file ], // prepend the filename.
+			$output
+		);
 		$exit_status = 1;
+	}
+}
+foreach ( $notices as $type => $data ) {
+	if ( $data ) {
+		echo "::$type::" . implode( '%0A', array_slice( $data, 0, -1 ) ) . "\n";
 	}
 }
 
