@@ -22,11 +22,10 @@ jobs:
     - name: Checkout Plugin
       run: |
         mkdir -p plugin
-        ZIP="https://downloads.wordpress.org/plugin/$SLUG.latest-stable.zip"
-        if [ -z "$VERSION" ];
-          then ZIP="https://downloads.wordpress.org/plugin/$SLUG.$VERSION.zip"
-        fi
-        curl $ZIP -so plugin.zip
+        if [ -z "$VERSION" ]; then VERSION="latest-stable"; fi
+        ZIP="https://downloads.wordpress.org/plugin/$SLUG.$VERSION.zip?nostats=1"
+        echo Downloading $ZIP..
+        curl "$ZIP" -o plugin.zip
         unzip -q plugin.zip -d plugin
       env:
           SLUG: "${{ github.event.client_payload.slug }}"
