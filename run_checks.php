@@ -74,7 +74,7 @@ foreach ( $notices as $type => $data ) {
 }
 
 // Run PHP CS PHPCompatibility checks.
-exec( ( file_exists( 'vendor/bin/phpcs' ) ? 'vendor/bin/phpcs' : 'phpcs' ) . ' -s plugin', $output, $returnval );
+exec( ( file_exists( 'vendor/bin/phpcs' ) ? 'vendor/bin/phpcs' : 'phpcs' ) . ' -s ' . $slug, $output, $returnval );
 echo implode( "\n", $output );
 if ( $returnval > 0 ) {
 
