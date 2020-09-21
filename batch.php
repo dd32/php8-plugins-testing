@@ -17,6 +17,9 @@ echo `mkdir $slug`;
 echo `unzip -q $slug.zip -d $slug`;
 echo `rm -f $slug.zip`;
 
+`git config --global user.email "dion@wordpress.org"`;
+`git config --global user.name "dd32"`;
+
 exec( "php run_checks.php $slug", $output, $return_var );
 
 $state = 0; // OK
@@ -60,7 +63,12 @@ if ( $errors ) {
 	file_put_contents( "./results/$state/$slug/errors.txt", implode( "\n", $errors ) );
 }
 
-`cd results && ( git add $state/$slug || true ) && git commit $state/$slug -m "$state $slug"`;
+$return_val = null;
+$try = 0;
+while ( 0 !== $return_val && $try++ <= 10 ) {
+	exec( "cd results && ( git add $state/$slug || true ) && git commit $state/$slug -m '$state $slug'", $output, $return_val );
+	sleep( 1 );
+}
 
 echo `rm -rf $slug`;
 
