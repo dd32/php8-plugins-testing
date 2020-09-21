@@ -22,8 +22,6 @@
 	<rule ref="PHPCompatibility">
 		<!-- Don't worry about the deprecated mysql extension. -->
 		<exclude name="PHPCompatibility.Extensions.RemovedExtensions.mysql_DeprecatedRemoved"/>
-
-		<!-- We don't need to warn about MySQL functions being removed. It's probably being used conditionally. -->
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_createdbDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_dropdbDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_listtablesDeprecatedRemoved"/>
@@ -88,8 +86,6 @@
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_listfieldsDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_dbnameDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mysql_table_nameDeprecatedRemoved"/>
-
-		<!-- And the mysql Ini settings-->
 		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_allow_local_infileRemoved"/>
 		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_allow_persistentRemoved"/>
 		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_max_persistentRemoved"/>
@@ -102,8 +98,6 @@
 		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_default_passwordRemoved"/>
 		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_connect_timeoutRemoved"/>
 		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_connect_timeoutRemoved"/>
-
-		<!-- and the mysql constants.. -->
 		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_client_compressDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_client_ignore_spaceDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_client_interactiveDeprecatedRemoved"/>
@@ -111,9 +105,6 @@
 		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_assocDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_bothDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_numDeprecatedRemoved"/>
-
-		<!-- yes, func_get_args() changed in PHP7, we don't care. -->
-		<exclude name="PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.Changed"/>
 
 		<!-- Ignore Mcrypt, it's probably being used conditionally -->
 		<exclude name="PHPCompatibility.Extensions.RemovedExtensions.mcryptDeprecatedRemoved"/>
@@ -205,6 +196,9 @@
 		<exclude name="PHPCompatibility.Constants.RemovedConstants.mcrypt_twofish256DeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.Constants.RemovedConstants.mcrypt_wakeDeprecatedRemoved"/>
 		<exclude name="PHPCompatibility.Constants.RemovedConstants.mcrypt_xteaDeprecatedRemoved"/>
+
+		<!-- yes, func_get_args() changed in PHP7, we don't care. -->
+		<exclude name="PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.Changed"/>
 
 		<!--
 			Calling die() or exit() within a __construct() will no longer call __destruct().
