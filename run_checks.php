@@ -80,6 +80,7 @@ foreach ( $notices as $type => $data ) {
 }
 
 // Run PHP CS PHPCompatibility checks.
+$output = []; // Clear it.
 exec( ( file_exists( 'vendor/bin/phpcs' ) ? 'vendor/bin/phpcs' : 'phpcs' ) . " -s --basepath=$slug/$slug $slug", $output, $returnval );
 echo implode( "\n", $output );
 if ( $returnval > 0 ) {
