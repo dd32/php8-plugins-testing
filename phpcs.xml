@@ -208,6 +208,9 @@
 
 		<!-- $HTTP_RAW_POST_DATA has been deprecated long enough that it's probably conditionally used, or back-filled. -->
 		<exclude name="PHPCompatibility.Variables.RemovedPredefinedGlobalVariables.http_raw_post_dataDeprecatedRemoved"/>
+
+		<!-- $HTTP_SERVER_VARS was replaced with $_SERVER long enough ago that it's probably conditionally used. -->
+		<exclude name="PHPCompatibility.Variables.RemovedPredefinedGlobalVariables.http_server_varsDeprecatedRemoved"/>
 	</rule>
 
 	<rule ref="PHPCompatibility.FunctionUse.RemovedFunctions.eachDeprecatedRemoved">
