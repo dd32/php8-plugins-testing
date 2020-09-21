@@ -21,12 +21,13 @@ jobs:
         php --version
     - name: Checkout Plugin
       run: |
-        mkdir -p plugin
+        mkdir -p $SLUG
         if [ -z "$VERSION" ]; then VERSION="latest-stable"; fi
         ZIP="https://downloads.wordpress.org/plugin/$SLUG.$VERSION.zip?nostats=1"
         echo Downloading $ZIP..
-        curl "$ZIP" -so plugin.zip
-        unzip -q plugin.zip -d plugin
+        curl "$ZIP" -so $SLUG.zip
+        unzip -q $SLUG.zip -d $SLUG
+        rm -f $SLUG.zip
       env:
           SLUG: "${{ github.event.client_payload.slug }}"
           VERSION: "${{ github.event.client_payload.version }}"

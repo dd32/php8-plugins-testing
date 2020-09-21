@@ -7,22 +7,20 @@ require __DIR__ . '/vendor/symfony/polyfill-php80/Php80.php';
 require __DIR__ . '/vendor/symfony/polyfill-php80/bootstrap.php';
 
 // Prepend some useful links.. This should be an info rather than warning/error? Not sure GitHub has one though?
-if ( !empty( $argv[1] ) ) {
-	$slug    = $argv[1];
-	$version = $argv[2] ?? '';
-	echo '::warning::' .
-		"Plugin: https://wordpress.org/plugins/$slug/" . "%0A" .
-		"Trac: https://plugins.trac.wordpress.org/browser/$slug/" . ( $version && 'trunk' != $version ? 'tags/' : '' ) . $version .
-		"\n";
-}
+$slug    = $argv[1] ?? 'plugin';
+$version = $argv[2] ?? '';
+echo '::warning::' .
+	"Plugin: https://wordpress.org/plugins/$slug/" . "%0A" .
+	"Trac: https://plugins.trac.wordpress.org/browser/$slug/" . ( $version && 'trunk' != $version ? 'tags/' : '' ) . $version .
+	"\n";
 
 // Run PHP8 linting.
-exec( 'find plugin -name "*.php" -not -name "*polyfill*"', $files, $returnval );
+exec( 'find '  . $slug . ' -name "*.php" -not -name "*polyfill*"', $files, $returnval );
 $notices = [ 'error' => [], 'warning' => [] ];
 
 foreach ( (array) $files as $_php_file ) {
 	$output = [];
-	$php_file = preg_replace( '|^plugin/[^/]+/|', '', $_php_file );
+	$php_file = preg_replace( '|^[^/]/[^/]+/|', '', $_php_file );
 
 	exec( 'php -l ' . escapeshellarg( $_php_file ) . ' 2>&1', $output );
 	echo implode( "\n", $output ) . "\n";
