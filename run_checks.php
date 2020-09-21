@@ -20,7 +20,7 @@ $notices = [ 'error' => [], 'warning' => [] ];
 
 foreach ( (array) $files as $_php_file ) {
 	$output = [];
-	$php_file = preg_replace( '|^[^/]/[^/]+/|', '', $_php_file );
+	$php_file = preg_replace( '|^[^/]+/[^/]+/|', '', $_php_file );
 
 	exec( 'php -l ' . escapeshellarg( $_php_file ) . ' 2>&1', $output );
 	echo implode( "\n", $output ) . "\n";
@@ -74,7 +74,7 @@ foreach ( $notices as $type => $data ) {
 }
 
 // Run PHP CS PHPCompatibility checks.
-exec( ( file_exists( 'vendor/bin/phpcs' ) ? 'vendor/bin/phpcs' : 'phpcs' ) . ' -s ' . $slug, $output, $returnval );
+exec( ( file_exists( 'vendor/bin/phpcs' ) ? 'vendor/bin/phpcs' : 'phpcs' ) . " -s --basepath=$slug/$slug $slug", $output, $returnval );
 echo implode( "\n", $output );
 if ( $returnval > 0 ) {
 
