@@ -115,6 +115,10 @@
 		<!-- yes, func_get_args() changed in PHP7, we don't care. -->
 		<exclude name="PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.Changed"/>
 
+		<!-- Ignore Mcrypt, it's probably being used conditionally -->
+		<exclude name="PHPCompatibility.FunctionUse.RemovedFunctions.mcrypt_create_ivDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.Extensions.RemovedExtensions.mcryptDeprecatedRemoved"/>
+
 		<!--
 			Calling die() or exit() within a __construct() will no longer call __destruct().
 			It's rare for plugins to have the __destruct(), and it doesn't check if it has one or not.
