@@ -103,6 +103,15 @@
 		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_connect_timeoutRemoved"/>
 		<exclude name="PHPCompatibility.IniDirectives.RemovedIniDirectives.mysql_connect_timeoutRemoved"/>
 
+		<!-- and the mysql constants.. -->
+		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_client_compressDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_client_ignore_spaceDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_client_interactiveDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_client_sslDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_assocDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_bothDeprecatedRemoved"/>
+		<exclude name="PHPCompatibility.Constants.RemovedConstants.mysql_numDeprecatedRemoved"/>
+
 		<!-- yes, func_get_args() changed in PHP7, we don't care. -->
 		<exclude name="PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.Changed"/>
 
