@@ -27,7 +27,13 @@ foreach ( (array) $files as $_php_file ) {
 
 	if ( ! str_contains( $output[0], 'No syntax errors detected' ) ) {
 		$error = 'error';
-		if ( str_starts_with( $output[0], 'PHP Warning:' ) && ! str_contains( $output[0], 'PHP Fatal error' ) ) {
+		if (
+			(
+				str_starts_with( $output[0], 'PHP Warning:' ) ||
+				str_starts_with( $output[0], 'Warning:' )
+			) &&
+			! str_contains( $output[0], 'PHP Fatal error' )
+		) {
 			$error = 'warning';
 		}
 
